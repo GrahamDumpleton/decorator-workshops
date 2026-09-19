@@ -632,6 +632,16 @@ numbered in the collection's order rather than alphabetically. If the
 index ever fails to fetch, the site still works and falls back to
 listing them in directory order.
 
+Ordering is not the same as landing there, though. The browser opens in
+place of the launcher only for a session with `browseOnStart` set or a
+launch link naming a collection or a catalog, and `jupyter workshop
+lite` writes neither: the site's own address opens at the launcher, with
+the workshops a click away in the browser. So the links in the README
+carry `?collection=` with the published index, which lands in the
+browser directly. Setting `browseOnStart` in the site would make the
+bare address do the same, and is the same gap as the analytics sink: the
+build writes the settings it is given and has no option for it.
+
 ## Extension features the workshops use
 
 The patterns settled from the extension's documentation in

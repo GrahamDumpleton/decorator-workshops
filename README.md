@@ -1,12 +1,12 @@
 # Python decorator workshops
 
-[![Launch in your browser](https://img.shields.io/badge/launch-jupyterlite-F37626?logo=jupyter&logoColor=white)](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html)
+[![Launch in your browser](https://img.shields.io/badge/launch-jupyterlite-F37626?logo=jupyter&logoColor=white)](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json)
 [![Launch on Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GrahamDumpleton/decorator-workshops/main?urlpath=lab)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/launch-codespaces-579ACA?logo=github&logoColor=white)](https://codespaces.new/GrahamDumpleton/decorator-workshops?quickstart=1)
 [![test](https://github.com/GrahamDumpleton/decorator-workshops/actions/workflows/test.yml/badge.svg)](https://github.com/GrahamDumpleton/decorator-workshops/actions/workflows/test.yml)
 
 Nothing to install: start the workshops
-[in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html),
+[in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json),
 with no account and no server at all, or on
 [mybinder.org](https://mybinder.org/v2/gh/GrahamDumpleton/decorator-workshops/main?urlpath=lab),
 or in
@@ -136,13 +136,19 @@ JupyterLab compiled to run entirely in the browser on a Python kernel
 built to WebAssembly. There is no server and no account: the page is
 static, and the Python runs in the tab. To start, click this link:
 
-**[Launch the workshops in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html)**
+**[Launch the workshops in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json)**
 
 The first badge at the top of this page opens the same link. Python
 itself is fetched when the page opens, so the first load takes a moment
 and needs network access; after that the workshops run locally in the
 tab. The workshop browser lists them numbered in the order to take them,
 and the Finish dialog of each offers the next.
+
+The `collection` parameter on that link is what lands you in the
+workshop browser rather than at JupyterLab's launcher, which is where
+the site's own address opens. It names the collection index published
+beside the site, the same one the site is built subscribed to, so the
+fourteen are listed under the collection's title and in its order.
 
 A link can open one workshop directly, by name:
 
