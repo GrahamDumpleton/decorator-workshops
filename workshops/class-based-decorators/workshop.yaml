@@ -1,0 +1,43 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: class-based-decorators
+title: Decorators that are classes
+version: 0.1.0
+description: Write a decorator as a class rather than a function. Keep state in an instance attribute, restore the identity it quietly replaces, use the constructor in place of the extra layer a configurable decorator needs, and see what it still cannot do.
+authors: [Graham Dumpleton]
+tags: [python, decorators, classes, functools]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You can now write a decorator either way and say which one a job
+  wants: a function for the common case, a class when there is state
+  worth naming or settings worth holding.
+
+  Next is **How methods bind**, which takes the failure this workshop
+  ended on, explains the mechanism behind it, and fixes it.
+
+  [functools.update_wrapper](https://docs.python.org/3/library/functools.html#functools.update_wrapper)
+  is the same machinery as `wraps`, applied to an object rather than a
+  function.
+variables:
+  - name: notebook
+    type: path
+    default: class-based-decorators.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-a-decorator-that-is-a-class.md
+  - pages/03-keeping-the-identity.md
+  - pages/04-settings-without-a-layer.md
+  - pages/05-the-catch-with-methods.md
+  - pages/06-finish.md

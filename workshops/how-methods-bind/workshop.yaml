@@ -1,0 +1,45 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: how-methods-bind
+title: How methods bind
+version: 0.1.0
+description: Find out how `obj.method()` finds its instance, by doing the binding by hand. Then fix the class-based decorator that could not do it, give a class its own `__get__`, and see that the protocol behind all of it is a plain language feature you can use directly.
+authors: [Graham Dumpleton]
+tags: [python, decorators, descriptors, methods]
+duration: 20m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You now know what `obj.method` actually does, why a class-based
+  decorator could not do it, and how to give one the same ability with
+  `__get__`.
+
+  Next is **Decorating classes**, where the decorator is applied to a
+  class rather than to a function, which is the last kind of target left
+  and the one the very first workshop showed you without explaining.
+
+  The [descriptor HowTo](https://docs.python.org/3/howto/descriptor.html)
+  is the reference for this, and it is worth reading now that you have
+  written one.
+variables:
+  - name: notebook
+    type: path
+    default: how-methods-bind.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-how-a-method-binds.md
+  - pages/03-the-one-that-cannot.md
+  - pages/04-giving-it-a-get.md
+  - pages/05-state-per-instance.md
+  - pages/06-a-descriptor-of-your-own.md
+  - pages/07-finish.md

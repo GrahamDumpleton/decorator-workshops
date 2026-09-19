@@ -1,0 +1,47 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: your-first-decorator
+title: Your first decorator
+version: 0.1.0
+description: Write the thing that goes after the @. Wrap a function by hand, then with the @ syntax, then build a timer, a call counter, and decorators that act before, after and instead of the function they wrap.
+authors: [Graham Dumpleton]
+tags: [python, decorators]
+duration: 20m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+instructions: { side: right, width: 0.3 }
+gating: soft
+finish: |
+  You have written decorators that log, time, count, and replace a call
+  entirely, and you know that `@name` is shorthand for handing your
+  function to `name` and keeping what comes back.
+
+  One thing was left unexplained: the wrapper keeps using `func` long
+  after the decorator that defined it has returned. The next workshop,
+  **How a decorator remembers**, is about exactly that.
+
+  The Python glossary's
+  [definition of a decorator](https://docs.python.org/3/glossary.html#term-decorator)
+  is the short version of what you just built.
+variables:
+  - name: notebook
+    type: path
+    default: your-first-decorator.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-wrapping-by-hand.md
+  - pages/03-the-at-syntax.md
+  - pages/04-timing-a-call.md
+  - pages/05-counting-calls.md
+  - pages/06-before-after-instead.md
+  - pages/07-when-it-raises.md
+  - pages/08-finish.md

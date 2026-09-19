@@ -1,0 +1,531 @@
+{
+  "version": 1,
+  "id": "grahamdumpleton.me/python-decorators",
+  "title": "Python decorator workshops",
+  "description": "Guided JupyterLab workshops that teach Python decorators: what they do, how to write them, and why they work. Standard library only, and they run in the browser.",
+  "ordered": true,
+  "workshops": [
+    {
+      "name": "what-a-decorator-does",
+      "title": "What a decorator does",
+      "description": "Meet decorators as a user before writing one. Put three decorators from the standard library to work, watch each change what a function or a class does, and find out what the @ line actually means.",
+      "tags": [
+        "python",
+        "decorators",
+        "functools"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "10m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/what-a-decorator-does"
+          }
+        }
+      ]
+    },
+    {
+      "name": "your-first-decorator",
+      "title": "Your first decorator",
+      "description": "Write the thing that goes after the @. Wrap a function by hand, then with the @ syntax, then build a timer, a call counter, and decorators that act before, after and instead of the function they wrap.",
+      "tags": [
+        "python",
+        "decorators"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "20m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/your-first-decorator"
+          }
+        }
+      ]
+    },
+    {
+      "name": "how-a-decorator-remembers",
+      "title": "How a decorator remembers",
+      "description": "Find out how a wrapper still knows the function it wraps after the decorator has returned. Open a closure and look inside it, build functions that make functions, keep state with nonlocal, and meet the pitfall that catches everyone once.",
+      "tags": [
+        "python",
+        "decorators",
+        "closures"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/how-a-decorator-remembers"
+          }
+        }
+      ]
+    },
+    {
+      "name": "decorators-that-take-arguments",
+      "title": "Decorators that take arguments",
+      "description": "Make a decorator work on any function, then make it configurable. Forward arguments with *args and **kwargs, add the extra layer that @repeat(3) needs, build a retry worth keeping, and handle a decorator used with and without parentheses.",
+      "tags": [
+        "python",
+        "decorators"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/decorators-that-take-arguments"
+          }
+        }
+      ]
+    },
+    {
+      "name": "preserving-the-wrapped-function",
+      "title": "Preserving the wrapped function",
+      "description": "Find out what a wrapper costs you, then fix it with one line. See what functools.wraps copies, why inspect still finds the original signature, and what is genuinely left over.",
+      "tags": [
+        "python",
+        "decorators",
+        "functools",
+        "inspect"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "10m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/preserving-the-wrapped-function"
+          }
+        }
+      ]
+    },
+    {
+      "name": "stacking-decorators",
+      "title": "Stacking decorators",
+      "description": "Put more than one decorator on a function and find out that they are applied in one order and run in another. See a stack where the order changes the answer, and walk the chain back to the original function.",
+      "tags": [
+        "python",
+        "decorators",
+        "functools"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/stacking-decorators"
+          }
+        }
+      ]
+    },
+    {
+      "name": "decorating-methods",
+      "title": "Decorating methods",
+      "description": "Put a decorator on a method and meet the most common surprise in Python decorators. See which kinds work, find the instance hiding in args, write a decorator that uses it, and learn the real rule for stacking with staticmethod and classmethod.",
+      "tags": [
+        "python",
+        "decorators",
+        "classes"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/decorating-methods"
+          }
+        }
+      ]
+    },
+    {
+      "name": "class-based-decorators",
+      "title": "Decorators that are classes",
+      "description": "Write a decorator as a class rather than a function. Keep state in an instance attribute, restore the identity it quietly replaces, use the constructor in place of the extra layer a configurable decorator needs, and see what it still cannot do.",
+      "tags": [
+        "python",
+        "decorators",
+        "classes",
+        "functools"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/class-based-decorators"
+          }
+        }
+      ]
+    },
+    {
+      "name": "how-methods-bind",
+      "title": "How methods bind",
+      "description": "Find out how `obj.method()` finds its instance, by doing the binding by hand. Then fix the class-based decorator that could not do it, give a class its own `__get__`, and see that the protocol behind all of it is a plain language feature you can use directly.",
+      "tags": [
+        "python",
+        "decorators",
+        "descriptors",
+        "methods"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "20m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/how-methods-bind"
+          }
+        }
+      ]
+    },
+    {
+      "name": "decorating-classes",
+      "title": "Decorating classes",
+      "description": "Put a decorator on a class rather than a function. Synthesise a `__repr__`, add comparison and meet the hashing trap that comes with it, freeze a class against assignment, and find out that `@dataclass` is an ordinary decorator doing exactly what you have just done by hand.",
+      "tags": [
+        "python",
+        "decorators",
+        "classes",
+        "dataclasses"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/decorating-classes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "caching-results",
+      "title": "Caching results",
+      "description": "Build the decorator you met in the first workshop. Write a naive cache, break it twice, fix the key with signature.bind, then use the standard library's own and find out what unbounded caching costs.",
+      "tags": [
+        "python",
+        "decorators",
+        "functools",
+        "caching"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/caching-results"
+          }
+        }
+      ]
+    },
+    {
+      "name": "registering-functions",
+      "title": "Registering functions",
+      "description": "Write a decorator that wraps nothing and changes nothing. Build a command registry, a route table and an event system, and recognise the shape you have already used in Flask, Click and pytest.",
+      "tags": [
+        "python",
+        "decorators",
+        "patterns"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/registering-functions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "retrying-and-handling-errors",
+      "title": "Retrying and handling errors",
+      "description": "Decorate the error path. Log a failure without swallowing it, translate an exception while keeping its cause, retry only the failures worth retrying, and watch the stacking order decide what ends up in your logs.",
+      "tags": [
+        "python",
+        "decorators",
+        "logging",
+        "exceptions"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/retrying-and-handling-errors"
+          }
+        }
+      ]
+    },
+    {
+      "name": "decorating-async-functions",
+      "title": "Decorating async functions",
+      "description": "Put an ordinary decorator on an async def and watch it fail without saying so. Write a wrapper that awaits, one decorator that serves both kinds, and find out what happens when a wrapper blocks the event loop.",
+      "tags": [
+        "python",
+        "decorators",
+        "asyncio"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "frontends": [
+        "jupyterlab",
+        "jupyterlite"
+      ],
+      "capabilities": [
+        "write-files",
+        "kernel-exec"
+      ],
+      "duration": "15m",
+      "authors": [
+        "Graham Dumpleton"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "source": {
+            "git": "https://github.com/GrahamDumpleton/decorator-workshops",
+            "ref": "main",
+            "subdir": "workshops/decorating-async-functions"
+          }
+        }
+      ]
+    }
+  ]
+}

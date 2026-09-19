@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: decorating-classes
+title: Decorating classes
+version: 0.1.0
+description: Put a decorator on a class rather than a function. Synthesise a `__repr__`, add comparison and meet the hashing trap that comes with it, freeze a class against assignment, and find out that `@dataclass` is an ordinary decorator doing exactly what you have just done by hand.
+authors: [Graham Dumpleton]
+tags: [python, decorators, classes, dataclasses]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  A decorator on a class is the same idea you started with, applied to a
+  different kind of object: it receives the class, it can change it, and
+  the name is bound to whatever comes back.
+
+  Next is **Caching results**, the first of four decorators worth having
+  written once, and one you met from the outside in the very first
+  workshop as `@functools.cache`.
+
+  [dataclasses](https://docs.python.org/3/library/dataclasses.html) is
+  worth a proper read now that you know what it is doing.
+variables:
+  - name: notebook
+    type: path
+    default: decorating-classes.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-a-decorator-on-a-class.md
+  - pages/03-adding-a-repr.md
+  - pages/04-adding-comparison.md
+  - pages/05-freezing-a-class.md
+  - pages/06-what-dataclass-is.md
+  - pages/07-finish.md

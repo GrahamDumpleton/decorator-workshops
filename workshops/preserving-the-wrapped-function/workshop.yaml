@@ -1,0 +1,43 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: preserving-the-wrapped-function
+title: Preserving the wrapped function
+version: 0.1.0
+description: Find out what a wrapper costs you, then fix it with one line. See what functools.wraps copies, why inspect still finds the original signature, and what is genuinely left over.
+authors: [Graham Dumpleton]
+tags: [python, decorators, functools, inspect]
+duration: 10m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  Every decorator you write from now on gets `@functools.wraps` on its
+  wrapper. It is one line, it costs nothing, and without it your
+  function loses its name, its docstring and its signature.
+
+  Next is **Stacking decorators**, where more than one decorator goes on
+  the same function and the order turns out to matter in two different
+  ways.
+
+  [functools.wraps](https://docs.python.org/3/library/functools.html#functools.wraps)
+  and [functools.update_wrapper](https://docs.python.org/3/library/functools.html#functools.update_wrapper)
+  document exactly what is copied.
+variables:
+  - name: notebook
+    type: path
+    default: preserving-the-wrapped-function.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-what-a-wrapper-costs.md
+  - pages/03-one-line.md
+  - pages/04-what-is-left.md
+  - pages/05-finish.md

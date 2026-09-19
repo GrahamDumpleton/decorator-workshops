@@ -1,0 +1,67 @@
+# Lint and self-test every workshop on both frontends, which is what
+# `just lint` and `just test-all` do locally. The commands are spelled out
+# rather than run through the Justfile so the job needs nothing but uv.
+#
+# Linux only, although the manifests declare linux, macos and windows.
+# No workshop here runs a command, so there is nothing platform specific
+# to get wrong; the declaration is there because the workshops would work
+# anywhere JupyterLab does, not because each platform is exercised.
+#
+# The JupyterLite runs need no node, npm or micromamba. Those are the
+# terminal's WebAssembly build step, and the self-test leaves the terminal
+# out for a workshop that declares no terminal capability, which is every
+# workshop here.
+name: test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install the locked environment and the self-test browser
+        run: |
+          uv sync
+          uv run playwright install --with-deps chromium
+
+      - name: Lint the index and every workshop, on both frontends
+        run: |
+          set -euo pipefail
+          uv run jupyter workshop lint collection.json
+          for workshop in workshops/*/; do
+            uv run jupyter workshop lint "$workshop"
+            uv run jupyter workshop lint "$workshop" --frontend jupyterlite
+          done
+
+      - name: Self-test every workshop in JupyterLab
+        run: |
+          set -euo pipefail
+          for workshop in workshops/*/; do
+            name=$(basename "$workshop")
+            uv run jupyter workshop test "$workshop" --junit "results-$name.xml"
+          done
+
+      - name: Self-test every workshop in JupyterLite
+        run: |
+          set -euo pipefail
+          for workshop in workshops/*/; do
+            name=$(basename "$workshop")
+            uv run jupyter workshop test "$workshop" \
+              --frontend jupyterlite --junit "results-$name-lite.xml"
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: results
+          path: results-*.xml
+          if-no-files-found: ignore

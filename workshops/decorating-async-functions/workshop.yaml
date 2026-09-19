@@ -1,0 +1,53 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: decorating-async-functions
+title: Decorating async functions
+version: 0.1.0
+description: Put an ordinary decorator on an async def and watch it fail without saying so. Write a wrapper that awaits, one decorator that serves both kinds, and find out what happens when a wrapper blocks the event loop.
+authors: [Graham Dumpleton]
+tags: [python, decorators, asyncio]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  That is the collection finished. You have gone from using a decorator
+  someone else wrote to writing your own for functions, methods,
+  classes and coroutines, and you know why each of them works.
+
+  Worth keeping in mind from here:
+
+  - `@functools.wraps` on every wrapper, always.
+
+  - `try`/`finally` when the work after the call has to happen even
+    when the call fails.
+
+  - The stacking order is a decision, not a detail.
+
+  - A decorator meant for both plain functions and methods, or for both
+    sync and async, gets awkward fast. That is the problem
+    [wrapt](https://wrapt.readthedocs.io/) exists to solve, and it is
+    where to look next.
+
+  The [glossary entry](https://docs.python.org/3/glossary.html#term-decorator)
+  you started with should read very differently now.
+variables:
+  - name: notebook
+    type: path
+    default: decorating-async-functions.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-the-quiet-failure.md
+  - pages/03-a-wrapper-that-awaits.md
+  - pages/04-one-decorator-for-both.md
+  - pages/05-waiting-without-blocking.md
+  - pages/06-finish.md

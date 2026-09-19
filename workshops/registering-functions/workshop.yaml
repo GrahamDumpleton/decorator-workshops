@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: registering-functions
+title: Registering functions
+version: 0.1.0
+description: Write a decorator that wraps nothing and changes nothing. Build a command registry, a route table and an event system, and recognise the shape you have already used in Flask, Click and pytest.
+authors: [Graham Dumpleton]
+tags: [python, decorators, patterns]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You have written the decorator that does nothing to the function, and
+  seen that "decorator" and "wrapper" are not the same word.
+
+  Next is **Retrying and handling errors**, where decorators go back to
+  wrapping, and the order you stack them in decides what you find in
+  your logs.
+
+  Flask's [route](https://flask.palletsprojects.com/en/stable/api/#flask.Flask.route),
+  Click's [command](https://click.palletsprojects.com/en/stable/api/#click.command)
+  and pytest's
+  [fixture](https://docs.pytest.org/en/stable/reference/reference.html#pytest-fixture)
+  are all this pattern, at a larger scale.
+variables:
+  - name: notebook
+    type: path
+    default: registering-functions.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-a-registry.md
+  - pages/03-a-route-table.md
+  - pages/04-many-handlers.md
+  - pages/05-finish.md

@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: stacking-decorators
+title: Stacking decorators
+version: 0.1.0
+description: Put more than one decorator on a function and find out that they are applied in one order and run in another. See a stack where the order changes the answer, and walk the chain back to the original function.
+authors: [Graham Dumpleton]
+tags: [python, decorators, functools]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You can now read a stack of decorators and say what it does: applied
+  bottom to top, run top to bottom, with the function itself in the
+  middle.
+
+  Next is **Decorating methods**, where a decorator that works perfectly
+  on a function meets a class and stops working, for a reason worth
+  understanding.
+
+  [inspect.unwrap](https://docs.python.org/3/library/inspect.html#inspect.unwrap)
+  is the standard way to get back to the original through a chain of
+  `__wrapped__` links.
+variables:
+  - name: notebook
+    type: path
+    default: stacking-decorators.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-which-way-round.md
+  - pages/03-the-onion.md
+  - pages/04-order-changes-the-answer.md
+  - pages/05-walking-the-chain.md
+  - pages/06-finish.md

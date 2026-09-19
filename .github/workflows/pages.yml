@@ -1,0 +1,84 @@
+# Publish the collection as a JupyterLite site on GitHub Pages, but only
+# after the test workflow has passed on main, so nothing reaches the site
+# that has not been linted and self-tested on both frontends. The
+# workflow_run trigger fires when test finishes; the build job runs only
+# when it finished successfully, and checks out the exact commit test ran
+# on rather than whatever main points at by then.
+#
+# The build is `just site` with two additions. `--trust trusted` removes
+# the trust dialog, as the Binder image does and for the same reason: a
+# JupyterLite site runs entirely inside the visitor's own browser, on a
+# Pyodide kernel, so nothing a workshop does reaches their machine.
+# `--collection` names the index the site's workshop browser subscribes
+# to, which is the copy of collection.json published beside the site, so
+# the workshops are listed numbered in the collection's order rather than
+# alphabetically. The index is copied into the site after the build,
+# since the build writes its output directory afresh.
+name: pages
+
+on:
+  workflow_run:
+    workflows: [test]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and never cancel one part way: a half
+# published site is worse than an old one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      # Gives base_url for this repository's Pages site, so the URL the
+      # site subscribes to is not written out by hand anywhere.
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install the locked environment
+        run: uv sync
+
+      - name: Build the JupyterLite site
+        run: |
+          set -euo pipefail
+          uv run jupyter workshop lite workshops/*/ \
+            --out dist \
+            --no-terminal \
+            --trust trusted \
+            --collection "${{ steps.pages.outputs.base_url }}/collection.json"
+
+      - name: Publish the collection index beside the site
+        run: cp collection.json dist/collection.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

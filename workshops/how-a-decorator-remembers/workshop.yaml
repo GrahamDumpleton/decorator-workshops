@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: how-a-decorator-remembers
+title: How a decorator remembers
+version: 0.1.0
+description: Find out how a wrapper still knows the function it wraps after the decorator has returned. Open a closure and look inside it, build functions that make functions, keep state with nonlocal, and meet the pitfall that catches everyone once.
+authors: [Graham Dumpleton]
+tags: [python, decorators, closures]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+instructions: { side: right, width: 0.3 }
+gating: soft
+finish: |
+  You have looked inside a closure, seen the cell that keeps the wrapped
+  function alive, changed a remembered value with `nonlocal`, and fixed
+  the late binding bug that catches every Python developer once.
+
+  Next is **Decorators that take arguments**, where the decorator itself
+  needs configuring, as in `@repeat(3)`. It needs one more layer than
+  you would expect, and closures are how that layer works.
+
+  The Python reference covers the rules behind all of this under
+  [naming and binding](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding).
+variables:
+  - name: notebook
+    type: path
+    default: how-a-decorator-remembers.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-the-cell.md
+  - pages/03-functions-making-functions.md
+  - pages/04-changing-what-is-remembered.md
+  - pages/05-the-loop-pitfall.md
+  - pages/06-finish.md

@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: what-a-decorator-does
+title: What a decorator does
+version: 0.1.0
+description: Meet decorators as a user before writing one. Put three decorators from the standard library to work, watch each change what a function or a class does, and find out what the @ line actually means.
+authors: [Graham Dumpleton]
+tags: [python, decorators, functools]
+duration: 10m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+instructions: { side: right, width: 0.3 }
+gating: soft
+finish: |
+  You have used three decorators without writing one, and you know what
+  the `@` line does: it hands your function to something else and binds
+  the name to whatever comes back.
+
+  Next is **Your first decorator**, where you write that something else
+  yourself, by hand first and then with `@`.
+
+  The Python glossary has a short
+  [definition of a decorator](https://docs.python.org/3/glossary.html#term-decorator),
+  and [functools](https://docs.python.org/3/library/functools.html)
+  documents `cache` and the other decorators the standard library ships.
+variables:
+  - name: notebook
+    type: path
+    default: what-a-decorator-does.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-one-line.md
+  - pages/03-not-only-caching.md
+  - pages/04-no-magic.md
+  - pages/05-finish.md

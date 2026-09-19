@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: retrying-and-handling-errors
+title: Retrying and handling errors
+version: 0.1.0
+description: Decorate the error path. Log a failure without swallowing it, translate an exception while keeping its cause, retry only the failures worth retrying, and watch the stacking order decide what ends up in your logs.
+authors: [Graham Dumpleton]
+tags: [python, decorators, logging, exceptions]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You can now decorate the error path: log it, translate it, retry it,
+  and choose deliberately where in a stack each of those belongs.
+
+  The last workshop, **Decorating async functions**, takes everything
+  you have written and puts it in front of `async def`, where a wrapper
+  that looks right times nothing and returns the wrong object entirely.
+
+  The [logging HOWTO](https://docs.python.org/3/howto/logging.html)
+  covers `logger.exception`, and the tutorial's
+  [chained exceptions](https://docs.python.org/3/tutorial/errors.html#exception-chaining)
+  section covers `raise ... from ...`.
+variables:
+  - name: notebook
+    type: path
+    default: retrying-and-handling-errors.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-logging-without-swallowing.md
+  - pages/03-translating-errors.md
+  - pages/04-retrying.md
+  - pages/05-order-decides.md
+  - pages/06-finish.md

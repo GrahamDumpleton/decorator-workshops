@@ -1,0 +1,47 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: caching-results
+title: Caching results
+version: 0.1.0
+description: Build the decorator you met in the first workshop. Write a naive cache, break it twice, fix the key with signature.bind, then use the standard library's own and find out what unbounded caching costs.
+authors: [Graham Dumpleton]
+tags: [python, decorators, functools, caching]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You have written a cache, broken it in the two ways caches usually
+  break, and seen why the standard library's version is the one to
+  reach for.
+
+  Next is **Registering functions**, a decorator that wraps nothing at
+  all and returns the function exactly as it found it, which is the
+  shape you have probably already met in Flask, Click or pytest without
+  recognising it.
+
+  [functools.lru_cache](https://docs.python.org/3/library/functools.html#functools.lru_cache)
+  and [functools.cache](https://docs.python.org/3/library/functools.html#functools.cache)
+  document the real thing, including the warning about methods that the
+  last page here demonstrates.
+variables:
+  - name: notebook
+    type: path
+    default: caching-results.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-a-cache-of-your-own.md
+  - pages/03-two-ways-it-breaks.md
+  - pages/04-fixing-the-key.md
+  - pages/05-the-real-thing.md
+  - pages/06-what-it-costs.md
+  - pages/07-finish.md

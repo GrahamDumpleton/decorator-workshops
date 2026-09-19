@@ -1,0 +1,44 @@
+apiVersion: jupyterlab-workshop/v1alpha1
+name: decorating-methods
+title: Decorating methods
+version: 0.1.0
+description: Put a decorator on a method and meet the most common surprise in Python decorators. See which kinds work, find the instance hiding in args, write a decorator that uses it, and learn the real rule for stacking with staticmethod and classmethod.
+authors: [Graham Dumpleton]
+tags: [python, decorators, classes]
+duration: 15m
+platforms: [linux, macos, windows]
+frontends: [jupyterlab, jupyterlite]
+capabilities:
+  - write-files
+  - kernel-exec
+layout: notebook
+layouts:
+  notebook:
+    main:
+      areas:
+        - { name: notebook, tabs: [] }
+gating: soft
+finish: |
+  You now know why a function decorator works on a method and a
+  class-based one does not, where the instance goes, and which way round
+  to stack with `@staticmethod` and `@classmethod`.
+
+  Next is **Decorators that are classes**, which takes the kind that
+  broke here and shows what it is good at, along with what it takes to
+  make it work on methods too.
+
+  The [descriptor HowTo](https://docs.python.org/3/howto/descriptor.html)
+  is the full account of the mechanism behind all of this, and the
+  [functions section](https://docs.python.org/3/howto/descriptor.html#functions-and-methods)
+  explains how an ordinary function becomes a bound method.
+variables:
+  - name: notebook
+    type: path
+    default: decorating-methods.ipynb
+    description: The notebook the exercises are done in
+pages:
+  - pages/01-welcome.md
+  - pages/02-when-it-breaks.md
+  - pages/03-where-the-instance-went.md
+  - pages/04-staticmethod-and-classmethod.md
+  - pages/05-finish.md

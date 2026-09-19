@@ -1,0 +1,30 @@
+# This repository is a collection of workshops, not a Python package: uv
+# manages the environment the workshops are written, checked and built
+# in. The runtime dependencies are what a learner needs, JupyterLab and
+# the extension, and are exported to binder/requirements.txt for
+# mybinder.org; the dev group adds the MCP server, the self-test and the
+# JupyterLite build. jupyterlab-workshop is pinned once, here, and the
+# dev group's extras resolve to the same release.
+#
+# Nothing else is listed, deliberately. The workshops teach Python
+# decorators with the standard library alone, so they install nothing
+# and declare no environment of their own. That is what lets them run
+# in JupyterLite, where there is no pip and no virtual environment.
+[project]
+name = "decorator-workshops"
+version = "0.1.0"
+description = "Guided JupyterLab workshops on Python decorators"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "jupyterlab>=4.6,<5",
+    "jupyterlab-workshop==0.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "jupyterlab-workshop[mcp,test,lite]",
+]
+
+[tool.uv]
+package = false

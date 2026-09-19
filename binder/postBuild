@@ -1,0 +1,58 @@
+#!/bin/bash
+# Configure the Binder image so JupyterLab starts in the workshop browser
+# with the decorator workshops listed as installed and ready to open, and
+# trusts them without asking, since the visitor is the one who chose the
+# link. A launch link naming a workshop still opens that workshop
+# directly. The disabled features keep visitors to the supplied
+# workshops: no other directories or URLs, no subscribing to collections
+# or catalogs, no removing and no editing; Restart puts a workshop back
+# as it started. Subscribing to the checkout's own collection.json lists
+# the workshops in the collection's order, numbered, under its title.
+# The welcome message in binder/welcome.md greets the visitor once the
+# session starts, with what the workshops are for and how to end it.
+# The analytics block reports every session's progress events to the
+# workshops' own analytics service, so it can be seen where the
+# workshops are clear and where they are not. Sessions are anonymous
+# and the events never carry file contents, command output or form
+# answers. The token is public by construction, since this file is,
+# and only routes events to the collection under a label naming
+# Binder; the welcome message tells the visitor that progress is
+# reported.
+#
+# There is nothing to install for the workshops themselves. They are
+# standard library only, with no environment key and no requirements of
+# their own, so the ambient kernel Binder builds from
+# binder/requirements.txt is the whole environment and this script only
+# writes settings.
+set -euo pipefail
+
+settings="${NB_PYTHON_PREFIX}/share/jupyter/lab/settings"
+
+mkdir -p "$settings"
+
+cat > "$settings/overrides.json" <<'JSON'
+{
+  "@jupyterlab-workshop/labextension:panel": {
+    "defaultWorkshop": "",
+    "browseOnStart": true,
+    "workshopsDirectory": "workshops",
+    "collections": ["collection.json"],
+    "welcome": "binder/welcome.md",
+    "trustPolicy": { "forcedLevel": "trusted" },
+    "disabledFeatures": [
+      "open-directory",
+      "open-url",
+      "collections",
+      "catalogs",
+      "remove",
+      "author"
+    ],
+    "analytics": {
+      "sink": "https://workshop-analytics.grumpys.work/events",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNGY2MzgzNDE3YTI0Njg2OTkyY2M0NjU5ZWQ4YzhiYSIsInN1YiI6ImRlY29yYXRvci1iaW5kZXIiLCJzY29wZSI6WyJpbmdlc3QiXSwibGFiZWxzIjp7ImRlcGxveW1lbnQiOiJkZWNvcmF0b3ItYmluZGVyIn0sIm9yaWdpbnMiOltdLCJpYXQiOjE3ODk4MDM4NTgsIm5iZiI6MTc4OTgwMzg1OCwiZXhwIjoxODIxMTM5MTk5fQ.v-E9MOd0ZupCXRBKoVUuMWHZ0tZD7qbOYc8lEeP7wpk"
+    }
+  }
+}
+JSON
+
+echo "Wrote the JupyterLab overrides to $settings/overrides.json"
