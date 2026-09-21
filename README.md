@@ -1,12 +1,12 @@
 # Python decorator workshops
 
-[![Launch in your browser](https://img.shields.io/badge/launch-jupyterlite-F37626?logo=jupyter&logoColor=white)](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json)
+[![Launch in your browser](https://img.shields.io/badge/launch-jupyterlite-F37626?logo=jupyter&logoColor=white)](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html)
 [![Launch on Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GrahamDumpleton/decorator-workshops/main?urlpath=lab)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/launch-codespaces-579ACA?logo=github&logoColor=white)](https://codespaces.new/GrahamDumpleton/decorator-workshops?quickstart=1)
 [![test](https://github.com/GrahamDumpleton/decorator-workshops/actions/workflows/test.yml/badge.svg)](https://github.com/GrahamDumpleton/decorator-workshops/actions/workflows/test.yml)
 
 Nothing to install: start the workshops
-[in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json),
+[in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html),
 with no account and no server at all, or on
 [mybinder.org](https://mybinder.org/v2/gh/GrahamDumpleton/decorator-workshops/main?urlpath=lab),
 or in
@@ -136,7 +136,7 @@ JupyterLab compiled to run entirely in the browser on a Python kernel
 built to WebAssembly. There is no server and no account: the page is
 static, and the Python runs in the tab. To start, click this link:
 
-**[Launch the workshops in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html?collection=https://grahamdumpleton.github.io/decorator-workshops/collection.json)**
+**[Launch the workshops in your browser](https://grahamdumpleton.github.io/decorator-workshops/lab/index.html)**
 
 The first badge at the top of this page opens the same link. Python
 itself is fetched when the page opens, so the first load takes a moment
@@ -144,11 +144,13 @@ and needs network access; after that the workshops run locally in the
 tab. The workshop browser lists them numbered in the order to take them,
 and the Finish dialog of each offers the next.
 
-The `collection` parameter on that link is what lands you in the
-workshop browser rather than at JupyterLab's launcher, which is where
-the site's own address opens. It names the collection index published
-beside the site, the same one the site is built subscribed to, so the
-fourteen are listed under the collection's title and in its order.
+The site's own address is the whole link. The site carries the
+collection index and is built subscribed to it, so the fourteen are
+listed numbered in the collection's order, and with no one workshop to
+open it starts in the workshop browser rather than at JupyterLab's
+launcher. If you left a workshop open on an earlier visit, the link
+takes you back to it; add JupyterLab's own `reset`, as in
+`.../lab/index.html?reset`, to land in the workshop browser regardless.
 
 A link can open one workshop directly, by name:
 
@@ -166,17 +168,25 @@ which is what a link for a talk or a class wants:
 
 Your work lives in the browser's own storage, so it survives a reload
 but belongs to that browser, and clearing site data discards it.
-Workshops are trusted without asking here, because nothing they do
-reaches your machine: the kernel is WebAssembly in the tab, and the
-files it writes are the browser's. Nothing is reported from this site
-either, unlike the Binder and Codespaces sessions below.
+Nothing is reported from this site, unlike the Binder and Codespaces
+sessions below.
+
+Opening a workshop shows the trust dialog, as it does in a codespace or
+a local install: what the workshop will do, which here is to write a
+notebook and run cells in it, and how far to trust it. The kernel is
+WebAssembly in the tab and the files it writes are the browser's, but
+the tab is still on your network, so code running in it can send
+requests to whatever your browser can reach, your local network
+included. That is yours to allow, so the site does not decide it for
+you. Choose Trust to let the actions run as intended; Restricted asks
+before changing files or running code. You are asked once for each
+workshop in that browser, and again only if the workshop changes.
 
 The site is built and published by
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml), which runs
 only after the test workflow has passed on `main`, so what is published
 has been linted and self-tested on both frontends. `just site` builds
-the site locally, without the published index and the forced trust the
-workflow adds, and `just site-serve` serves it to try out.
+the same site locally, and `just site-serve` serves it to try out.
 
 ## Launch on Binder
 

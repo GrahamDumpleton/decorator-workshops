@@ -98,14 +98,18 @@ test-all:
     done
 
 # No workshop here uses a terminal, so the site is built without one,
-# which also drops the build's need for node, npm and micromamba.
+# which also drops the build's need for node, npm and micromamba. The
+# build carries collection.json in the site and subscribes to it there,
+# so the workshop browser lists the workshops numbered in the
+# collection's order, and with no one workshop to open the site starts
+# in the browser.
 # Build the JupyterLite site into dist/, carrying every workshop.
 site *ARGS:
-    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal {{ARGS}}
+    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json {{ARGS}}
 
 # Build the JupyterLite site and serve it locally to try it out.
 site-serve *ARGS:
-    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --serve {{ARGS}}
+    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json --serve {{ARGS}}
 
 # The repository URL is given explicitly so the index does not depend on
 # a git remote being configured in the checkout.

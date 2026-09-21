@@ -618,29 +618,34 @@ terminal out for a workshop that declares no terminal capability.
 Pages, triggered by that workflow finishing successfully on `main`, so
 nothing reaches the site that has not been tested. It checks out the
 commit the tests ran on rather than whatever `main` points at by then.
-The site is built with `--trust trusted`, on the same reasoning as
-Binder: a Lite site runs entirely in the visitor's browser, so nothing
-a workshop does reaches their machine.
+The site forces no trust level, so opening a workshop there shows the
+trust dialog, once for each workshop in that browser. It was first built
+with `--trust trusted`, on the reasoning that a Lite site runs entirely
+in the visitor's browser, so nothing a workshop does reaches their
+machine. That holds for files and processes and not for the network: the
+tab is on the visitor's network, and code running in it can send
+requests to whatever their browser can reach, their local network
+included. A Binder container is somewhere else and is thrown away, which
+is why the dialog is removed there and not here.
 
 That also settles the teaching order, which used not to reach the built
-site. The build now passes `--collection`, naming the copy of
-`collection.json` published beside the site, and
-`actions/configure-pages` supplies the base URL so it is not written
-out by hand. The site's `jupyter-lite.json` carries that URL in its
-`collections` setting, so the workshop browser lists the fourteen
-numbered in the collection's order rather than alphabetically. If the
-index ever fails to fetch, the site still works and falls back to
-listing them in directory order.
+site. The build passes `--collection collection.json`, and from
+jupyterlab-workshop 0.8.0 a local index is carried inside the site's
+contents and subscribed to by that path, so the build does not need to
+know the address the site is served from and nothing is copied in
+afterwards. The workshop browser matches the prebuilt workshops to the
+entries of the index by name and lists the fourteen numbered in the
+collection's order rather than alphabetically.
 
-Ordering is not the same as landing there, though. The browser opens in
-place of the launcher only for a session with `browseOnStart` set or a
-launch link naming a collection or a catalog, and `jupyter workshop
-lite` writes neither: the site's own address opens at the launcher, with
-the workshops a click away in the browser. So the links in the README
-carry `?collection=` with the published index, which lands in the
-browser directly. Setting `browseOnStart` in the site would make the
-bare address do the same, and is the same gap as the analytics sink: the
-build writes the settings it is given and has no option for it.
+Landing there is settled the same way. The browser opens in place of
+the launcher only for a session with `browseOnStart` set or a launch
+link naming a collection or a catalog, and from 0.8.0 the build sets
+`browseOnStart` for a site with no one workshop to open, which a site of
+fourteen is. So the site's own address lands in the browser, and the
+links in the README are that address and no more; before 0.8.0 they had
+to carry `?collection=` with the absolute URL of the published index. A
+visitor who left a workshop open is returned to it, as on Binder, and
+JupyterLab's own `reset` on the link lands in the browser regardless.
 
 ## Extension features the workshops use
 
@@ -760,9 +765,8 @@ The authoring trap the first three workshops turned up, a verify with
 several `cell-executed` triggers failing with a `NameError` on names the
 later cells define, was a defect in the extension: a check that raised
 in the notebook's kernel made the kernel drop the cell queued behind it.
-It is fixed in jupyterlab-workshop 0.7.0, which is the pinned release,
-so the one trigger per verify rule that worked around it is gone from
-AGENTS.md.
+It was fixed in jupyterlab-workshop 0.7.0, so the one trigger per verify
+rule that worked around it is gone from AGENTS.md.
 
 ## Open questions
 
@@ -770,9 +774,11 @@ Decisions not yet taken. Remove each as it is settled and record the
 answer in the section it belongs to.
 
 - **Analytics from the published site.** Binder and Codespaces report
-  progress events; the JupyterLite site does not. `jupyter workshop
-  lite` writes the settings it is given and has no analytics option, so
-  a sink there means writing the site's overrides another way. Since the
+  progress events; the JupyterLite site does not. From
+  jupyterlab-workshop 0.8.0, `jupyter workshop lite --settings` builds a
+  settings file holding an `analytics` block into the site, and
+  `--welcome` carries the message that would tell the visitor, so what
+  is left is a token for the site's origin and the two files. Since the
   site is the link most people will follow, it is also where the numbers
   would say the most, which is the case for doing it rather than leaving
   it.
