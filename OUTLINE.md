@@ -599,7 +599,7 @@ and `decorator-codespaces`, so the service tells the two apart and
 either can be revoked alone; the tokens are public by construction,
 since the settings scripts are. Each welcome message tells the visitor
 that progress is reported and what is never sent. The JupyterLite site
-reports nothing yet.
+reports the same way, which is covered with its build below.
 
 Neither is needed by the workshops themselves, which want no terminal
 and install nothing. They are there because a real CPython is the
@@ -646,6 +646,20 @@ links in the README are that address and no more; before 0.8.0 they had
 to carry `?collection=` with the absolute URL of the published index. A
 visitor who left a workshop open is returned to it, as on Binder, and
 JupyterLab's own `reset` on the link lands in the browser regardless.
+
+The site reports progress events too, which used to be an open question
+because `jupyter workshop lite` had no way to be given a sink. From
+0.8.0 `--settings lite/settings.json` builds the `analytics` block into
+the site and `--welcome lite/welcome.md` carries the message that tells
+the visitor, which matters more here than elsewhere: a block in the
+site's settings applies without asking, so the trust dialog never
+mentions it. The site is the link most people will follow, so it is
+where the numbers say the most. Its ingest token is a third one,
+labelled `decorator-lite`, public like the others and issued for the
+site's origin, `https://grahamdumpleton.github.io`. The browser posts
+the events itself, so the service has to allow the origin, and it takes
+that from the token; from any other origin, a site served locally
+included, the browser's preflight is refused and nothing is sent.
 
 ## Extension features the workshops use
 
@@ -773,13 +787,5 @@ rule that worked around it is gone from AGENTS.md.
 Decisions not yet taken. Remove each as it is settled and record the
 answer in the section it belongs to.
 
-- **Analytics from the published site.** Binder and Codespaces report
-  progress events; the JupyterLite site does not. From
-  jupyterlab-workshop 0.8.0, `jupyter workshop lite --settings` builds a
-  settings file holding an `analytics` block into the site, and
-  `--welcome` carries the message that would tell the visitor, so what
-  is left is a token for the site's origin and the two files. Since the
-  site is the link most people will follow, it is also where the numbers
-  would say the most, which is the case for doing it rather than leaving
-  it.
+None at present.
 

@@ -19,6 +19,15 @@
 # site is served from. With fourteen workshops and none to open on
 # start, the build also has the site start in the workshop browser, so
 # the site's own address is all a link needs.
+#
+# `--settings lite/settings.json` builds the analytics block into the
+# site, so sessions report anonymous progress events to the workshops'
+# own analytics service as the Binder and Codespaces ones do. The token
+# in it is public by construction, since the site is, and only routes
+# events to the collection under a label naming the site; the service
+# lets it post from this site's origin and no other. `--welcome
+# lite/welcome.md` carries the message a visitor is greeted with, which
+# tells them that progress is reported.
 name: pages
 
 on:
@@ -65,7 +74,9 @@ jobs:
           uv run jupyter workshop lite workshops/*/ \
             --out dist \
             --no-terminal \
-            --collection collection.json
+            --collection collection.json \
+            --settings lite/settings.json \
+            --welcome lite/welcome.md
 
       - uses: actions/upload-pages-artifact@v3
         with:

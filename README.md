@@ -168,8 +168,15 @@ which is what a link for a talk or a class wants:
 
 Your work lives in the browser's own storage, so it survives a reload
 but belongs to that browser, and clearing site data discards it.
-Nothing is reported from this site, unlike the Binder and Codespaces
-sessions below.
+
+The site reports progress to the workshops' own analytics service, as
+the Binder and Codespaces sessions below do, under a token of its own,
+labelled `decorator-lite`, which the service accepts from this site's
+address and no other. There is no account, so nothing reported
+identifies you, and nothing you type is sent. The welcome message the
+site opens with, `lite/welcome.md`, says so before you start, and
+`lite/settings.json` is the settings file the build puts into the site
+to name the service.
 
 Opening a workshop shows the trust dialog, as it does in a codespace or
 a local install: what the workshop will do, which here is to write a
@@ -322,6 +329,9 @@ binder/                  the Binder image: the locked runtime dependencies expor
 .devcontainer/           the Codespaces container: the same requirements installed with
                          pip, the settings, a script that starts JupyterLab on port
                          8888, and the welcome message VS Code opens
+lite/                    the JupyterLite site's own files: the settings built into
+                         the site, which name the analytics service, and the
+                         welcome message the site opens with
 .github/workflows/       CI: test.yml lints and self-tests every workshop on both
                          frontends, and pages.yml publishes the JupyterLite site to
                          GitHub Pages once test.yml has passed on main

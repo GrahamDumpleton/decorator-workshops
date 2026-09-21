@@ -102,14 +102,17 @@ test-all:
 # build carries collection.json in the site and subscribes to it there,
 # so the workshop browser lists the workshops numbered in the
 # collection's order, and with no one workshop to open the site starts
-# in the browser.
+# in the browser. lite/settings.json is built into the site and names
+# the analytics sink, under a token that only the published site's
+# origin may post with, so a site served locally reports nothing, and
+# lite/welcome.md is the message that tells a visitor so.
 # Build the JupyterLite site into dist/, carrying every workshop.
 site *ARGS:
-    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json {{ARGS}}
+    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json --settings lite/settings.json --welcome lite/welcome.md {{ARGS}}
 
 # Build the JupyterLite site and serve it locally to try it out.
 site-serve *ARGS:
-    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json --serve {{ARGS}}
+    uv run jupyter workshop lite workshops/*/ --out dist --no-terminal --collection collection.json --settings lite/settings.json --welcome lite/welcome.md --serve {{ARGS}}
 
 # The repository URL is given explicitly so the index does not depend on
 # a git remote being configured in the checkout.
