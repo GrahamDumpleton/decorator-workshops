@@ -661,6 +661,18 @@ the events itself, so the service has to allow the origin, and it takes
 that from the token; from any other origin, a site served locally
 included, the browser's preflight is refused and nothing is sent.
 
+The same settings file disables what `binder/postBuild` and the
+codespace's settings disable, `open-directory`, `open-url`,
+`collections`, `catalogs`, `remove` and `author`, so that the site too
+keeps a visitor to the workshops the link was for. A visitor could only
+ever change their own browser's copy, but a prebuilt workshop that has
+been removed comes back only by clearing the site's data, and a site
+that offers editing or other collections is not the thing the link
+promised. With `collections` disabled the `collection` launch parameter
+is ignored, so an old link that still carries `?collection=` lands in
+the browser like the site's own address, with no complaint about an
+index that is no longer published.
+
 ## Extension features the workshops use
 
 The patterns settled from the extension's documentation in

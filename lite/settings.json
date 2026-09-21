@@ -1,5 +1,13 @@
 {
   "@jupyterlab-workshop/labextension:panel": {
+    "disabledFeatures": [
+      "open-directory",
+      "open-url",
+      "collections",
+      "catalogs",
+      "remove",
+      "author"
+    ],
     "analytics": {
       "sink": "https://workshop-analytics.grumpys.work/events",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiNjVhZTNkMWUyNjU0YTQ5YTFiNmRkM2U3ZDBjYzkxNiIsInN1YiI6ImRlY29yYXRvci1saXRlIiwic2NvcGUiOlsiaW5nZXN0Il0sImxhYmVscyI6eyJkZXBsb3ltZW50IjoiZGVjb3JhdG9yLWxpdGUifSwib3JpZ2lucyI6WyJodHRwczovL2dyYWhhbWR1bXBsZXRvbi5naXRodWIuaW8iXSwiaWF0IjoxNzg5OTkyNjI3LCJuYmYiOjE3ODk5OTI2MjcsImV4cCI6MTgyMTEzOTE5OX0.rKdYqAcXkp1psEzmFoa3ASwex4B-dnlOkfiR8sa-koE"

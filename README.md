@@ -178,6 +178,11 @@ site opens with, `lite/welcome.md`, says so before you start, and
 `lite/settings.json` is the settings file the build puts into the site
 to name the service.
 
+The same settings file keeps the site to the workshops it was built
+for, as the Binder and Codespaces sessions are kept: no opening other
+directories or URLs, no subscribing to other collections or catalogs,
+no removing and no editing. Restart puts a workshop back as it started.
+
 Opening a workshop shows the trust dialog, as it does in a codespace or
 a local install: what the workshop will do, which here is to write a
 notebook and run cells in it, and how far to trust it. The kernel is
@@ -330,8 +335,9 @@ binder/                  the Binder image: the locked runtime dependencies expor
                          pip, the settings, a script that starts JupyterLab on port
                          8888, and the welcome message VS Code opens
 lite/                    the JupyterLite site's own files: the settings built into
-                         the site, which name the analytics service, and the
-                         welcome message the site opens with
+                         the site, which keep it to these workshops and name the
+                         analytics service, and the welcome message the site
+                         opens with
 .github/workflows/       CI: test.yml lints and self-tests every workshop on both
                          frontends, and pages.yml publishes the JupyterLite site to
                          GitHub Pages once test.yml has passed on main

@@ -20,14 +20,17 @@
 # start, the build also has the site start in the workshop browser, so
 # the site's own address is all a link needs.
 #
-# `--settings lite/settings.json` builds the analytics block into the
-# site, so sessions report anonymous progress events to the workshops'
-# own analytics service as the Binder and Codespaces ones do. The token
-# in it is public by construction, since the site is, and only routes
-# events to the collection under a label naming the site; the service
-# lets it post from this site's origin and no other. `--welcome
-# lite/welcome.md` carries the message a visitor is greeted with, which
-# tells them that progress is reported.
+# `--settings lite/settings.json` builds two things into the site. Its
+# disabled features keep visitors to the supplied workshops, as the
+# Binder and Codespaces settings do: no other directories or URLs, no
+# subscribing to collections or catalogs, no removing and no editing.
+# Its analytics block has sessions report anonymous progress events to
+# the workshops' own analytics service as the Binder and Codespaces ones
+# do. The token in it is public by construction, since the site is, and
+# only routes events to the collection under a label naming the site;
+# the service lets it post from this site's origin and no other.
+# `--welcome lite/welcome.md` carries the message a visitor is greeted
+# with, which tells them that progress is reported.
 name: pages
 
 on:
