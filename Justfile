@@ -142,13 +142,18 @@ bump VERSION:
     git -C reference/jupyterlab-workshop checkout "{{VERSION}}"
     git add reference/jupyterlab-workshop
 
-# Remove what opening, running and publishing the workshops leaves behind.
+# A workshop's kernelspec is registered for the user, outside the
+# checkout, so removing the environment directory leaves a kernel in
+# the launcher that points at a Python that no longer exists. The prune
+# unregisters only the workshop kernelspecs whose environment is gone.
+# Remove what opening, running and publishing the workshops leaves behind, and the kernelspecs left pointing at removed environments.
 clean:
     rm -rf workshops/*/_workshop workshops/*/work workshops/*/dist workshops/*/scratch
     rm -rf dist .jupyterlite.doit.db
     rm -f results-*.xml
     find . -type d -name .ipynb_checkpoints -not -path "./.venv/*" -exec rm -rf {} +
     find . -type d -name __pycache__ -not -path "./.venv/*" -not -path "./scratch/*" -exec rm -rf {} +
+    uv run jupyter workshop kernels --prune
 
 # Also remove the environment and the skill link; run `just install` afterwards.
 distclean: clean
