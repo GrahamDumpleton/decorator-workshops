@@ -17,6 +17,9 @@
 # The workshops install nothing of their own: they are standard library
 # only, with no environment key and no requirements, so there is no
 # wheelhouse to fill and this is the whole of the setup.
+# The second block is JupyterLab's own: it turns off the question about
+# fetching Jupyter news, which would otherwise come before the welcome
+# message the first time the codespace's JupyterLab opens.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -52,6 +55,9 @@ cat > "$overrides" <<'JSON'
       "sink": "https://workshop-analytics.grumpys.work/events",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMTg2ZjFlZDU5Yzc0MWJmYmU3NTkxNWZmN2FmODAwOCIsInN1YiI6ImRlY29yYXRvci1jb2Rlc3BhY2VzIiwic2NvcGUiOlsiaW5nZXN0Il0sImxhYmVscyI6eyJkZXBsb3ltZW50IjoiZGVjb3JhdG9yLWNvZGVzcGFjZXMifSwib3JpZ2lucyI6W10sImlhdCI6MTc4OTgwMzg1OCwibmJmIjoxNzg5ODAzODU4LCJleHAiOjE4MjExMzkxOTl9.f6Pd7GcJsyQDAe8p1e3xmVbD_8lsCm9rlkOlZq4I-QQ"
     }
+  },
+  "@jupyterlab/apputils-extension:notification": {
+    "fetchNews": "false"
   }
 }
 JSON

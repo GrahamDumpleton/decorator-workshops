@@ -24,6 +24,9 @@
 # their own, so the ambient kernel Binder builds from
 # binder/requirements.txt is the whole environment and this script only
 # writes settings.
+# The second block is JupyterLab's own: it turns off the question about
+# fetching Jupyter news, which a fresh container would otherwise put in
+# front of every visitor before the welcome message.
 set -euo pipefail
 
 settings="${NB_PYTHON_PREFIX}/share/jupyter/lab/settings"
@@ -51,6 +54,9 @@ cat > "$settings/overrides.json" <<'JSON'
       "sink": "https://workshop-analytics.grumpys.work/events",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNGY2MzgzNDE3YTI0Njg2OTkyY2M0NjU5ZWQ4YzhiYSIsInN1YiI6ImRlY29yYXRvci1iaW5kZXIiLCJzY29wZSI6WyJpbmdlc3QiXSwibGFiZWxzIjp7ImRlcGxveW1lbnQiOiJkZWNvcmF0b3ItYmluZGVyIn0sIm9yaWdpbnMiOltdLCJpYXQiOjE3ODk4MDM4NTgsIm5iZiI6MTc4OTgwMzg1OCwiZXhwIjoxODIxMTM5MTk5fQ.v-E9MOd0ZupCXRBKoVUuMWHZ0tZD7qbOYc8lEeP7wpk"
     }
+  },
+  "@jupyterlab/apputils-extension:notification": {
+    "fetchNews": "false"
   }
 }
 JSON
