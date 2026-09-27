@@ -9,10 +9,10 @@
 # to trusted, so the learner is shown what a workshop asks to do and
 # decides before it runs anything in their codespace. pip rather than uv,
 # as on Binder, since this is the learner's environment. The analytics
-# block is the same as Binder's but carries a token of its own, so the
-# service tells the two apart and either can be revoked alone; it is as
-# public as this file and only routes anonymous progress events to the
-# workshops' service.
+# setting is Binder's: it reports every session's progress events to
+# the sink the collection.json analytics block names, without asking,
+# and the welcome message says so; the events say they came from a
+# codespace.
 #
 # The workshops install nothing of their own: they are standard library
 # only, with no environment key and no requirements, so there is no
@@ -51,10 +51,7 @@ cat > "$overrides" <<'JSON'
       "remove",
       "author"
     ],
-    "analytics": {
-      "sink": "https://workshop-analytics.grumpys.work/events",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMTg2ZjFlZDU5Yzc0MWJmYmU3NTkxNWZmN2FmODAwOCIsInN1YiI6ImRlY29yYXRvci1jb2Rlc3BhY2VzIiwic2NvcGUiOlsiaW5nZXN0Il0sImxhYmVscyI6eyJkZXBsb3ltZW50IjoiZGVjb3JhdG9yLWNvZGVzcGFjZXMifSwib3JpZ2lucyI6W10sImlhdCI6MTc4OTgwMzg1OCwibmJmIjoxNzg5ODAzODU4LCJleHAiOjE4MjExMzkxOTl9.f6Pd7GcJsyQDAe8p1e3xmVbD_8lsCm9rlkOlZq4I-QQ"
-    }
+    "analytics": { "report": "always" }
   },
   "@jupyterlab/apputils-extension:notification": {
     "fetchNews": "false"

@@ -24,11 +24,12 @@
 # disabled features keep visitors to the supplied workshops, as the
 # Binder and Codespaces settings do: no other directories or URLs, no
 # subscribing to collections or catalogs, no removing and no editing.
-# Its analytics block has sessions report anonymous progress events to
-# the workshops' own analytics service as the Binder and Codespaces ones
-# do. The token in it is public by construction, since the site is, and
-# only routes events to the collection under a label naming the site;
-# the service lets it post from this site's origin and no other.
+# Its analytics setting has sessions report anonymous progress events
+# to the sink the collection's index names, the workshops' own
+# analytics service, without asking, as the Binder and Codespaces ones
+# do. The sink and its token are declared once, in collection.json;
+# the token is public by construction, since the site is, and the
+# service lets it post from this site's origin.
 # `--welcome lite/welcome.md` carries the message a visitor is greeted
 # with, which tells them that progress is reported.
 name: pages

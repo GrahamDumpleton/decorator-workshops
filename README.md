@@ -14,8 +14,9 @@ or in
 with a GitHub account (see
 [Launch in your browser](#launch-in-your-browser),
 [Launch on Binder](#launch-on-binder) and
-[Launch on Codespaces](#launch-on-codespaces) below). Or
-[run them locally](#run-locally).
+[Launch on Codespaces](#launch-on-codespaces) below). Or run them
+[in a container](#run-in-a-container) with nothing installed but
+Docker, or [locally](#run-locally).
 
 Guided, hands-on workshops that teach Python decorators, from what a
 decorator is through to writing your own for functions, methods, classes
@@ -170,13 +171,13 @@ Your work lives in the browser's own storage, so it survives a reload
 but belongs to that browser, and clearing site data discards it.
 
 The site reports progress to the workshops' own analytics service, as
-the Binder and Codespaces sessions below do, under a token of its own,
-labelled `decorator-lite`, which the service accepts from this site's
-address and no other. There is no account, so nothing reported
-identifies you, and nothing you type is sent. The welcome message the
-site opens with, `lite/welcome.md`, says so before you start, and
-`lite/settings.json` is the settings file the build puts into the site
-to name the service.
+the Binder and Codespaces sessions below do. The service is named once,
+in `collection.json`, as the collection's sink, with a token the
+service accepts from this site's address; `lite/settings.json` is the
+settings file the build puts into the site to turn reporting on. There
+is no account, so nothing reported identifies you, and nothing you type
+is sent. The welcome message the site opens with, `lite/welcome.md`,
+says so before you start.
 
 The same settings file keeps the site to the workshops it was built
 for, as the Binder and Codespaces sessions are kept: no opening other
@@ -226,14 +227,15 @@ checkout's own `collection.json`, and names `binder/welcome.md` as the
 message shown when the session starts, which says what the workshops are
 and how to end the session.
 
-The same override names the workshops' own analytics service as the sink
-for progress events, so a session reports which pages, actions and
-checks happened and when, and it can be seen where the workshops are
-clear and where they are not. Sessions are anonymous, and the events
-never carry notebook contents, cell output or form answers; the welcome
-message says that progress is reported before you start. The token in
-the script is as public as the script, is accepted only for ingest, and
-is labelled `decorator-binder` so it can be revoked on its own.
+The same override turns on reporting to the workshops' own analytics
+service, which `collection.json` names as the collection's sink, so a
+session reports which pages, actions and checks happened and when, and
+it can be seen where the workshops are clear and where they are not.
+Sessions are anonymous, and the events never carry notebook contents,
+cell output or form answers; the welcome message says that progress is
+reported before you start. The token in the index is as public as the
+index and is accepted only for ingest; the events say whether they came
+from Binder, a codespace, the site or a container.
 
 Binder sessions are temporary: anything you do in one is gone when it
 ends, so finish a workshop in the session you started it in. When you
@@ -269,11 +271,10 @@ gone, open the address of the port labelled JupyterLab from VS Code's
 Ports panel. The tab is not opened by itself, because browsers block a
 tab nobody clicked for. From there the workshop browser lists the
 workshops in order, as on Binder, and `setup.sh` installs the same
-settings override as `binder/postBuild`, reporting progress to the same
-analytics service under a token of its own, labelled
-`decorator-codespaces`, with two differences: it names
-`.devcontainer/welcome.md` as the message shown when JupyterLab starts,
-and it does not mark the workshops as trusted.
+settings override as `binder/postBuild`, reporting progress to the
+collection's sink without asking as Binder does, with two differences:
+it names `.devcontainer/welcome.md` as the message shown when
+JupyterLab starts, and it does not mark the workshops as trusted.
 
 On Binder the trust dialog is removed, because the session is an
 anonymous container that is thrown away when you are done. A codespace
@@ -299,6 +300,48 @@ work, and starting it again from
 again with it. A stopped codespace still uses your storage allowance, so
 delete it there when you have finished with the workshops.
 
+## Run in a container
+
+Every jupyterlab-workshop release is published as a container image,
+with JupyterLab and the extension ready and no workshops inside. Run it
+with this collection's index and it installs the fourteen workshops,
+starts JupyterLab and prints the link to open:
+
+```
+docker run --rm -p 8888:8888 \
+    -e WORKSHOP_COLLECTION=https://raw.githubusercontent.com/GrahamDumpleton/decorator-workshops/main/collection.json \
+    -e WORKSHOP_INSTALL=1 \
+    -e WORKSHOP_ANALYTICS=always \
+    ghcr.io/grahamdumpleton/jupyterlab-workshop:0.13.0
+```
+
+The link, `http://127.0.0.1:8888/lab?token=…`, appears in the
+container's output once the server is up. It opens the workshop browser
+with the workshops listed under Installed, numbered in the order to
+take them, and trusted, since whoever ran the image chose them; the
+image needs the network to fetch them at start and nothing after that,
+as the workshops are standard library only. Podman runs the same
+command. Name a workshop to open it straight away instead of the
+browser, `-e WORKSHOP_WORKSHOP=what-a-decorator-does`, and pass a fixed
+token with `-e JUPYTER_TOKEN=…` so the link is the same every start.
+
+The workshops and everything you make in them live in the container's
+home directory, `/home/jovyan`, and go when the container does. To keep
+them, mount a volume there: `-v decorators:/home/jovyan`. The next run
+finds the workshops already installed, so it starts without the
+network, and finds your files and your progress where you left them.
+
+`WORKSHOP_ANALYTICS=always` reports your progress to the workshops'
+own analytics service as the site, Binder and Codespaces do, which
+pages you visited, which actions you clicked and what the checks found,
+and when, with nothing that identifies you and none of what you type or
+make. The trust dialog is not shown in the container, so leaving the
+variable out means nothing is reported: the checkbox that would offer
+it is never seen. The image, its variables and how a collection can
+build an image of its own with the workshops already inside are
+described in [the
+documentation](https://jupyterlab-workshop.readthedocs.io/en/latest/deploying.html#a-container-image).
+
 ## Run locally
 
 You need Python 3.14 and [uv](https://docs.astral.sh/uv/). Clone the
@@ -321,7 +364,9 @@ first, and the Finish dialog at the end of each offers the next.
 ```
 workshops/
   <name>/                a workshop: workshop.yaml and pages/*.md
-collection.json          the index the workshop browser reads, written by `just index`
+collection.json          the index the workshop browser reads, written by `just index`,
+                         which also names the analytics service every deployment
+                         reports to
 reference/jupyterlab-workshop
                          a git submodule of jupyterlab-workshop at the pinned release,
                          the full documentation and source of the workshop format
@@ -335,8 +380,8 @@ binder/                  the Binder image: the locked runtime dependencies expor
                          pip, the settings, a script that starts JupyterLab on port
                          8888, and the welcome message VS Code opens
 lite/                    the JupyterLite site's own files: the settings built into
-                         the site, which keep it to these workshops and name the
-                         analytics service, and the welcome message the site
+                         the site, which keep it to these workshops and turn
+                         progress reporting on, and the welcome message the site
                          opens with
 .github/workflows/       CI: test.yml lints and self-tests every workshop on both
                          frontends, and pages.yml publishes the JupyterLite site to

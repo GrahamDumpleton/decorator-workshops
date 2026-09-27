@@ -4,6 +4,10 @@
   "title": "Python decorator workshops",
   "description": "Guided JupyterLab workshops that teach Python decorators: what they do, how to write them, and why they work. Standard library only, and they run in the browser.",
   "ordered": true,
+  "analytics": {
+    "sink": "https://workshop-analytics.grumpys.work/events",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NmIwMDVmNzZmNGQ0OWQ1YThlMTVmMDVlOGM5MTE3MiIsInN1YiI6ImRvY2tlci13b3Jrc2hvcHMiLCJzY29wZSI6WyJpbmdlc3QiXSwibGFiZWxzIjp7fSwib3JpZ2lucyI6WyJodHRwczovL2dyYWhhbWR1bXBsZXRvbi5naXRodWIuaW8iXSwiaWF0IjoxNzkwNTA1OTM4LCJuYmYiOjE3OTA1MDU5MzgsImV4cCI6MTgyMTU3MTE5OX0.wFr7BaOMgbVSsAp2ODx20ZyL5W1j7FhXb2PjIVxoolc"
+  },
   "workshops": [
     {
       "name": "what-a-decorator-does",

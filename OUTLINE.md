@@ -594,12 +594,16 @@ GitHub token.
 
 Both report anonymous progress events to the workshops' own analytics
 service, which is how it can be seen where a workshop loses people.
-Each carries an ingest token of its own, labelled `decorator-binder`
-and `decorator-codespaces`, so the service tells the two apart and
-either can be revoked alone; the tokens are public by construction,
-since the settings scripts are. Each welcome message tells the visitor
-that progress is reported and what is never sent. The JupyterLite site
-reports the same way, which is covered with its build below.
+The service and its ingest token are declared once, in the analytics
+block of `collection.json`, and each deployment's settings only turn
+reporting on with `report: always`, since from 0.13.0 a deployment can
+adopt the sink its collection declares; the events themselves say
+whether they came from Binder, a codespace, the site or a container,
+so no token or label per deployment is needed. The token is public by
+construction, since the index is. Each welcome message tells the
+visitor that progress is reported and what is never sent. The
+JupyterLite site reports the same way, which is covered with its
+build below.
 
 Neither is needed by the workshops themselves, which want no terminal
 and install nothing. They are there because a real CPython is the
@@ -654,12 +658,13 @@ the site and `--welcome lite/welcome.md` carries the message that tells
 the visitor, which matters more here than elsewhere: a block in the
 site's settings applies without asking, so the trust dialog never
 mentions it. The site is the link most people will follow, so it is
-where the numbers say the most. Its ingest token is a third one,
-labelled `decorator-lite`, public like the others and issued for the
-site's origin, `https://grahamdumpleton.github.io`. The browser posts
-the events itself, so the service has to allow the origin, and it takes
-that from the token; from any other origin, a site served locally
-included, the browser's preflight is refused and nothing is sent.
+where the numbers say the most. The site reports with the collection's
+token, the same one Binder and the codespace use, which is issued for
+the site's origin, `https://grahamdumpleton.github.io`, as well. The
+browser posts the events itself, so the service has to allow the
+origin, and it takes that from the token; from any other origin, a
+site served locally included, the browser's preflight is refused and
+nothing is sent.
 
 The same settings file disables what `binder/postBuild` and the
 codespace's settings disable, `open-directory`, `open-url`,
