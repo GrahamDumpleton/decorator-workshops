@@ -312,7 +312,7 @@ docker run --rm -p 8888:8888 \
     -e WORKSHOP_COLLECTION=https://raw.githubusercontent.com/GrahamDumpleton/decorator-workshops/main/collection.json \
     -e WORKSHOP_INSTALL=1 \
     -e WORKSHOP_ANALYTICS=always \
-    ghcr.io/grahamdumpleton/jupyterlab-workshop:0.13.0
+    ghcr.io/grahamdumpleton/jupyterlab-workshop:0.15.0
 ```
 
 The link, `http://127.0.0.1:8888/lab?token=…`, appears in the
